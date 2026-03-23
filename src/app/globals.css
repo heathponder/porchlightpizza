@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1A1008;
+  --color-surface: #231810;
+  --color-surface-alt: #2A1E14;
+  --color-accent: #E8913A;
+  --color-accent-light: #F4A84E;
+  --color-accent-dark: #D47A28;
+  --color-text-primary: #F5EDE4;
+  --color-text-secondary: #A89882;
+  --color-border: #3A2E22;
+  --color-border-hover: #4A3E32;
+  --color-highlight: #C4442A;
+
+  --font-heading: var(--font-playfair);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background-color: var(--color-primary);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+nav {
+  z-index: 50 !important;
+}
+
+/* ---- Scroll reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Section divider glow ---- */
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.3;
+}
+
+/* ---- Nav link hover underline ---- */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---- Navbar scroll transition ---- */
+.nav-solid {
+  background-color: rgba(26, 16, 8, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---- Menu card hover ---- */
+.menu-card {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.menu-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 40px rgba(232, 145, 58, 0.1);
+}
+
+/* ---- Hero parallax background ---- */
+.hero-bg {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ---- Floating animation ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ---- Shimmer for CTA buttons ---- */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn-shimmer {
+  background-size: 200% auto;
+  background-image: linear-gradient(90deg,
+    var(--color-accent) 0%,
+    var(--color-accent-light) 40%,
+    var(--color-accent) 60%,
+    var(--color-accent) 100%
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ---- Warm ambient glow on accent elements ---- */
+.accent-glow {
+  box-shadow: 0 0 20px rgba(232, 145, 58, 0.15),
+              0 0 60px rgba(232, 145, 58, 0.05);
+}
+
+/* ---- Star rating ---- */
+.star {
+  color: #FACC15;
+}
+
+/* ---- Counter animation ---- */
+@keyframes countPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* ---- Map scroll lock ---- */
+.map-container iframe {
+  pointer-events: none;
+}
+
+.map-container:hover iframe {
+  pointer-events: auto;
+}
+
+.map-container::after {
+  content: 'Click to interact with map';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26, 16, 8, 0.85);
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.map-container:hover::after {
+  opacity: 1;
+}
+
+/* ---- Review card quote styling ---- */
+.review-quote {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.review-quote::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+  border-radius: 1px;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dark);
+}
